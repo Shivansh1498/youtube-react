@@ -1,0 +1,15 @@
+@mixin flexbox($vertical: center, $horizontal: center) {
+  display: flex;
+  align-items: $vertical;
+  justify-content: $horizontal;
+}
+
+@mixin truncateText($numberOfLines: 1) {
+  display: box;
+  display: -webkit-box;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $numberOfLines;
+}
