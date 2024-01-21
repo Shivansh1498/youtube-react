@@ -1,16 +1,16 @@
+import { Tooltip } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 import { VerifiedIcon } from "../assets/svgs/VerifiedIcon";
+import { HomeVideoCard } from "../types/youtubeTypes";
 import {
   convertDurationToTime,
   formatNumberForView,
   timeSincePublished,
 } from "../utils/helperFunctions";
-import { Link } from "react-router-dom";
-import { HomeVideoCard } from "../types/youtubeTypes";
-import { Tooltip } from "@mui/material";
 
 const YoutubeVideoCard = ({
   imageUrl,
@@ -41,7 +41,7 @@ const YoutubeVideoCard = ({
           <CardMedia
             sx={{ width: "350px", height: "225px" }}
             image={imageUrl}
-            title=""
+            title={""}
           />
           <span className="video-timespan-badge">{videoDuration}</span>
         </span>

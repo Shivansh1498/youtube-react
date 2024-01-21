@@ -5,12 +5,16 @@ import "./index.scss";
 import { CssBaseline } from "@mui/material";
 import { Provider } from "react-redux";
 import store from "./store/store.ts";
+import { ThemeProvider } from "@mui/material/styles";
+import { appTheme } from "./theme/appTheme.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <CssBaseline />
-      <App />
-    </React.StrictMode>
-  </Provider>
+  <ThemeProvider theme={appTheme}>
+    <Provider store={store}>
+      <React.StrictMode>
+        <CssBaseline />
+        <App />
+      </React.StrictMode>
+    </Provider>
+  </ThemeProvider>
 );

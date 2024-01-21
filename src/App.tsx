@@ -1,9 +1,9 @@
 import { Suspense, lazy } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import "./App.scss";
-import Sidebar from "./components/Sidebar";
 import { useSelector } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.scss";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
 import { IRootState } from "./store/store";
 
 // Importing Pages Using Lazy Loading

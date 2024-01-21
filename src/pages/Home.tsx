@@ -1,9 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-import { IRootState } from "../store/store";
-import YoutubeVideoCard from "../components/YoutubeVideoCard";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import YoutubeVideoCard from "../components/YoutubeVideoCard";
 import { openSidebar } from "../store/slices/header/headerSlice";
 import { mostPopularVideosAsync } from "../store/slices/youtubeVideo/youtubeVideoSlice";
+import { IRootState } from "../store/store";
 
 const Home = () => {
   const videos = useSelector<IRootState>((state) => state.youtubeVideos.video);
