@@ -1,5 +1,3 @@
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -13,10 +11,11 @@ import { HamburgerLogo } from "../assets/svgs/HamburgerLogo";
 import { SearchLogo } from "../assets/svgs/SearchLogo";
 import { YoutubeLogo } from "../assets/svgs/YoutubeLogo";
 import { toggleSidebar } from "../store/slices/header/headerSlice";
+import { toggleTheme } from "../store/slices/theme/themeSlice";
 import { searchVideosAsync } from "../store/slices/youtubeVideo/youtubeVideoSlice";
+import ToggleThemeButton from "./ToggleThemeButton";
 
 const Header = () => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
@@ -33,13 +32,17 @@ const Header = () => {
     setSearchQuery("");
   }
 
+  function handleThemeChange(): void {
+    dispatch(toggleTheme());
+  }
+
   return (
     <Box
-      sx={{ flexGrow: 1, top: 1, height: "64px" }}
+      sx={{ flexGrow: 1, top: 0, height: "64px" }}
       position={"sticky"}
       zIndex={1}
     >
-      <AppBar position="static" sx={{ backgroundColor: "white" }}>
+      <AppBar position="static" elevation={0}>
         <Toolbar className="navbar-container">
           <div className="left-section">
             <IconButton
@@ -82,16 +85,7 @@ const Header = () => {
             </div>
           </form>
           <div className="right-section">
-            <Button
-              variant="outlined"
-              onClick={() => setIsDarkMode((prev) => !prev)}
-            >
-              {isDarkMode ? (
-                <LightModeIcon color="warning" />
-              ) : (
-                <DarkModeIcon color="error" />
-              )}
-            </Button>
+            <ToggleThemeButton onChange={handleThemeChange} />
           </div>
         </Toolbar>
       </AppBar>

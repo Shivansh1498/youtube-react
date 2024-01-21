@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import youtubeVideoReducer from "./slices/youtubeVideo/youtubeVideoSlice";
 import headerReducer from "./slices/header/headerSlice";
+import themeReducer from "./slices/theme/themeSlice";
 
 const store = configureStore({
   reducer: {
+    theme: themeReducer,
     header: headerReducer,
     youtubeVideos: youtubeVideoReducer,
   },
