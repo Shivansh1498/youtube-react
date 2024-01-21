@@ -5,18 +5,15 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
+import { ThunkDispatch } from "@reduxjs/toolkit";
+import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { HamburgerLogo } from "../assets/svgs/HamburgerLogo";
 import { SearchLogo } from "../assets/svgs/SearchLogo";
 import { YoutubeLogo } from "../assets/svgs/YoutubeLogo";
 import { toggleSidebar } from "../store/slices/header/headerSlice";
-import {
-  mostPopularVideosAsync,
-  searchVideosAsync,
-} from "../store/slices/youtubeVideo/youtubeVideoSlice";
-import { ThunkDispatch } from "@reduxjs/toolkit";
-import { Link, useNavigate } from "react-router-dom";
-import { FormEvent, useState } from "react";
+import { searchVideosAsync } from "../store/slices/youtubeVideo/youtubeVideoSlice";
 
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
@@ -27,7 +24,6 @@ const Header = () => {
 
   const isSidebarOpen = () => {
     dispatch(toggleSidebar());
-    // dispatch(mostPopularVideosAsync());
   };
 
   function handleSearch(e: FormEvent<HTMLFormElement>): void {

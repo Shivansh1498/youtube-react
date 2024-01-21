@@ -81,3 +81,14 @@ export interface HomeVideoCard {
   videoId: string;
   videoLength: string;
 }
+
+export interface SearchPageVideoCardProps {
+  thumbnail: string;
+  title: string;
+  description: string;
+  channelTitle: string;
+  noOfViews: string;
+  uplodedHowLongAgo: string;
+  isVerified: string;
+  videoId: string;
+}

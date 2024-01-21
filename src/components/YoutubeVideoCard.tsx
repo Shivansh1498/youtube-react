@@ -10,6 +10,7 @@ import {
 } from "../utils/helperFunctions";
 import { Link } from "react-router-dom";
 import { HomeVideoCard } from "../types/youtubeTypes";
+import { Tooltip } from "@mui/material";
 
 const YoutubeVideoCard = ({
   imageUrl,
@@ -40,26 +41,29 @@ const YoutubeVideoCard = ({
           <CardMedia
             sx={{ width: "350px", height: "225px" }}
             image={imageUrl}
-            title="food"
+            title=""
           />
           <span className="video-timespan-badge">{videoDuration}</span>
         </span>
         <CardContent>
-          <Typography
-            className="video-title"
-            gutterBottom
-            variant="body1"
-            component="a"
-            noWrap
-          >
-            {title}
-          </Typography>
+          <Tooltip title={title}>
+            <Typography
+              className="video-title"
+              gutterBottom
+              variant="body1"
+              component="a"
+              noWrap
+            >
+              {title}
+            </Typography>
+          </Tooltip>
           <Typography
             variant="body2"
             color="text.secondary"
             sx={{ display: "flex" }}
           >
-            {channelName} <span> {isVerified && VerifiedIcon}</span>
+            {channelName}{" "}
+            <span className="verified-icon"> {isVerified && VerifiedIcon}</span>
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {formatNumberForView(viewCount)} views •{" "}

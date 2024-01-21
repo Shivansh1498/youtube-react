@@ -3,6 +3,7 @@ import { IRootState } from "../store/store";
 import YoutubeVideoCard from "../components/YoutubeVideoCard";
 import { useEffect } from "react";
 import { openSidebar } from "../store/slices/header/headerSlice";
+import { mostPopularVideosAsync } from "../store/slices/youtubeVideo/youtubeVideoSlice";
 
 const Home = () => {
   const videos = useSelector<IRootState>((state) => state.youtubeVideos.video);
@@ -10,6 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(openSidebar());
+    dispatch(mostPopularVideosAsync());
   }, []);
 
   return (

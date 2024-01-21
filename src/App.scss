@@ -77,13 +77,6 @@
     max-height: 4.4rem;
     @include truncateText(2);
   }
-
-  svg {
-    fill: #00000099;
-    height: 16px !important;
-    margin-left: 5px;
-    margin-top: 2px;
-  }
 }
 
 // Search Page Styles
@@ -91,8 +84,18 @@
   .search-page-video-card-title {
     @include truncateText(2);
   }
+  .search-page-video-card-channel-name {
+    font-size: 12px;
+    font-weight: 600;
+    @include truncateText;
+  }
   .search-page-video-card-description {
     @include truncateText;
+  }
+  .search-page-video-card-verified-icon {
+    position: relative;
+    right: 15px;
+    bottom: 1px;
   }
 
   .search-page-video-card {
@@ -136,4 +139,13 @@ body::-webkit-scrollbar-thumb {
   letter-spacing: 0.5px;
   color: #fff;
   background-color: #000000cc;
+}
+
+.verified-icon {
+  svg {
+    fill: #00000099;
+    height: 16px !important;
+    margin-left: 5px;
+    margin-top: 2px;
+  }
 }

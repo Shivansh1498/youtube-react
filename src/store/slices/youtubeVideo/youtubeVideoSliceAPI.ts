@@ -21,14 +21,11 @@ export const searchVideos = async (queryString: string) => {
         import.meta.env.VITE_YOUTUBE_API_KEY
       }`
     );
-    console.log("search result: ", data);
     return data;
   } catch (error) {
     console.log(error);
   }
 };
-
-//  /search?part=snippet&maxResults=25&q=indian%20polic%20force&key=[YOUR_API_KEY] HTTP/1.1
 
 export const relatedVideos = async (currentVideoId: string) => {
   try {
