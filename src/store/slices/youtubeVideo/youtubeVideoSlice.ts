@@ -45,6 +45,9 @@ const youtubeVideoSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    clearSearchResults: (state: VideoState) => {
+      state.searchQueryResult = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -87,6 +90,7 @@ const youtubeVideoSlice = createSlice({
   },
 });
 
-export const { clearYouTubeVideo } = youtubeVideoSlice.actions;
+export const { clearYouTubeVideo, clearSearchResults } =
+  youtubeVideoSlice.actions;
 
 export default youtubeVideoSlice.reducer;

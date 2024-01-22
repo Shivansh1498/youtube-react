@@ -3,7 +3,10 @@ import SearchPageVideoCard from "../components/SearchPageVideoCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { searchVideosAsync } from "../store/slices/youtubeVideo/youtubeVideoSlice";
+import {
+  clearSearchResults,
+  searchVideosAsync,
+} from "../store/slices/youtubeVideo/youtubeVideoSlice";
 
 const SearchPage = () => {
   const videoDetails = useSelector(
@@ -21,6 +24,10 @@ const SearchPage = () => {
     if (searchQuery.trim().length > 0) {
       dispatch(searchVideosAsync(searchQuery));
     }
+
+    return () => {
+      dispatch(clearSearchResults());
+    };
   }, []);
 
   return (
