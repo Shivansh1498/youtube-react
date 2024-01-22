@@ -29,7 +29,6 @@ const Header = () => {
     e.preventDefault();
     dispatch(searchVideosAsync(searchQuery));
     navigate(`/results?search_query=${searchQuery}`);
-    setSearchQuery("");
   }
 
   function handleThemeChange(): void {
