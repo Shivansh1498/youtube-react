@@ -1,13 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import youtubeVideoReducer from "./slices/youtubeVideo/youtubeVideoSlice";
-import headerReducer from "./slices/header/headerSlice";
-import themeReducer from "./slices/theme/themeSlice";
+import themeSlice from "./slices/theme/themeSlice";
+import headerSlice from "./slices/header/headerSlice";
+import youtubeVideoSlice from "./slices/youtubeVideo/youtubeVideoSlice";
+import currentVideoSlice from "./slices/currentVideo/currentVideoSlice";
+// import commentThreadReducer from "./slices/commentThread/commentThreadSlice";
 
 const store = configureStore({
   reducer: {
-    theme: themeReducer,
-    header: headerReducer,
-    youtubeVideos: youtubeVideoReducer,
+    theme: themeSlice,
+    header: headerSlice,
+    youtubeVideos: youtubeVideoSlice,
+    currentVideo: currentVideoSlice,
+    // commentSection: commentThreadReducer,
   },
 });
 

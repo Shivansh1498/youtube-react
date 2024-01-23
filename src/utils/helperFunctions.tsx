@@ -1,4 +1,4 @@
-export const formatNumberForView = (number: number, locale = "en-US") => {
+export const formatYoutubeCount = (number: number, locale = "en-US") => {
   const formattedNumber = new Intl.NumberFormat(locale, {
     notation: "compact",
     compactDisplay: "short",

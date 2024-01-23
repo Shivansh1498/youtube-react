@@ -8,7 +8,7 @@ import { VerifiedIcon } from "../assets/svgs/VerifiedIcon";
 import { HomeVideoCard } from "../types/youtubeTypes";
 import {
   convertDurationToTime,
-  formatNumberForView,
+  formatYoutubeCount,
   timeSincePublished,
 } from "../utils/helperFunctions";
 
@@ -66,7 +66,7 @@ const YoutubeVideoCard = ({
             <span className="verified-icon"> {isVerified && VerifiedIcon}</span>
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {formatNumberForView(viewCount)} views •{" "}
+            {formatYoutubeCount(viewCount)} views •{" "}
             {timeSincePublished(timeAgo)}
           </Typography>
         </CardContent>

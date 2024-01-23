@@ -1,8 +1,8 @@
 import { Box, Stack } from "@mui/material";
-import SearchPageVideoCard from "../components/SearchPageVideoCard";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import SearchPageVideoCard from "../components/SearchPageVideoCard";
 import {
   clearSearchResults,
   searchVideosAsync,
