@@ -12,6 +12,7 @@ import { VerifiedIcon } from "../assets/svgs/VerifiedIcon";
 import { SearchPageVideoCardProps } from "../types/youtubeTypes";
 import { timeSincePublished } from "../utils/helperFunctions";
 import { Link } from "react-router-dom";
+import { useTheme } from "@emotion/react";
 
 const SearchPageVideoCard = ({
   thumbnail,
@@ -23,6 +24,7 @@ const SearchPageVideoCard = ({
   videoId,
 }: // isVerified,
 SearchPageVideoCardProps) => {
+  const theme = useTheme();
   return (
     <Link to={`/watch?v=${videoId}`}>
       <Card
@@ -86,7 +88,10 @@ SearchPageVideoCardProps) => {
               >
                 {channelTitle}
               </Typography>
-              <span className="verified-icon search-page-video-card-verified-icon">
+              <span
+                className="verified-icon search-page-video-card-verified-icon"
+                style={{ fill: theme.palette.icon.fill }}
+              >
                 {VerifiedIcon}
               </span>
             </Stack>

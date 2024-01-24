@@ -1,8 +1,5 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import Toolbar from "@mui/material/Toolbar";
+import { useTheme } from "@emotion/react";
+import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -11,12 +8,24 @@ import { HamburgerLogo } from "../assets/svgs/HamburgerLogo";
 import { SearchLogo } from "../assets/svgs/SearchLogo";
 import { YoutubeLogo } from "../assets/svgs/YoutubeLogo";
 import { toggleSidebar } from "../store/slices/header/headerSlice";
+import { searchVideosAsync } from "../store/slices/searchResult/searchResultSlice";
 import { toggleTheme } from "../store/slices/theme/themeSlice";
 import ToggleThemeButton from "./ToggleThemeButton";
-import { searchVideosAsync } from "../store/slices/searchResult/searchResultSlice";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const theme = useTheme();
+
+  const {
+    icon: { fill },
+    appbar: {
+      background,
+      border,
+      inputBackground,
+      inputColor,
+      searchIconBackground,
+    },
+  } = theme.palette;
 
   const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const navigate = useNavigate();
@@ -41,7 +50,11 @@ const Header = () => {
       position={"sticky"}
       zIndex={1}
     >
-      <AppBar position="static" elevation={0}>
+      <AppBar
+        position="static"
+        elevation={0}
+        sx={{ backgroundColor: background }}
+      >
         <Toolbar className="navbar-container">
           <div className="left-section">
             <IconButton
@@ -49,7 +62,7 @@ const Header = () => {
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 2 }}
+              sx={{ mr: 2, fill: theme.palette.icon.fill }}
               onClick={isSidebarOpen}
             >
               <span>{HamburgerLogo}</span>
@@ -61,7 +74,7 @@ const Header = () => {
                 edge="start"
                 color="inherit"
                 aria-label="menu"
-                sx={{ mr: 2, width: "110px" }}
+                sx={{ mr: 2, width: "110px", fill: theme.palette.icon.fill }}
               >
                 {YoutubeLogo}
               </IconButton>
@@ -77,9 +90,18 @@ const Header = () => {
                 autoComplete={"off"}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                style={{
+                  borderColor: border,
+                  backgroundColor: inputBackground,
+                  color: inputColor,
+                }}
               />
-              <Button className="search-btn" type="submit">
-                <span>{SearchLogo}</span>
+              <Button
+                className="search-btn"
+                type="submit"
+                sx={{ backgroundColor: searchIconBackground }}
+              >
+                <span style={{ fill: fill }}>{SearchLogo}</span>
               </Button>
             </div>
           </form>

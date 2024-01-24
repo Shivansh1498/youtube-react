@@ -11,6 +11,7 @@ import {
   formatYoutubeCount,
   timeSincePublished,
 } from "../utils/helperFunctions";
+import { useTheme } from "@emotion/react";
 
 const YoutubeVideoCard = ({
   imageUrl,
@@ -23,6 +24,7 @@ const YoutubeVideoCard = ({
   videoLength,
 }: HomeVideoCard) => {
   const videoDuration = convertDurationToTime(videoLength);
+  const theme = useTheme();
 
   return (
     <Link to={`/watch?v=${videoId}`}>
@@ -63,7 +65,13 @@ const YoutubeVideoCard = ({
             sx={{ display: "flex" }}
           >
             {channelName}{" "}
-            <span className="verified-icon"> {isVerified && VerifiedIcon}</span>
+            <span
+              className="verified-icon"
+              style={{ fill: theme.palette.icon.fill }}
+            >
+              {" "}
+              {isVerified && VerifiedIcon}
+            </span>
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {formatYoutubeCount(viewCount)} views •{" "}
