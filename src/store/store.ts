@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import themeSlice from "./slices/theme/themeSlice";
-import headerSlice from "./slices/header/headerSlice";
-import youtubeVideoSlice from "./slices/youtubeVideo/youtubeVideoSlice";
-import currentVideoSlice from "./slices/currentVideo/currentVideoSlice";
 import commentThreadSlice from "./slices/commentThread/commentThreadSlice";
+import currentVideoSlice from "./slices/currentVideo/currentVideoSlice";
+import headerSlice from "./slices/header/headerSlice";
+import themeSlice from "./slices/theme/themeSlice";
+import youtubeVideoSlice from "./slices/youtubeVideo/youtubeVideoSlice";
+import searchResultSlice from "./slices/searchResult/searchResultSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     header: headerSlice,
     youtubeVideos: youtubeVideoSlice,
     currentVideo: currentVideoSlice,
+    searchResults: searchResultSlice,
     commentSection: commentThreadSlice,
   },
 });

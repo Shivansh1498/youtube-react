@@ -1,7 +1,5 @@
 export interface VideoState {
   video: YouTubeVideo | null;
-  relatedVideos: null;
-  searchQueryResult: null;
   loading: boolean;
   error: unknown | null;
 }

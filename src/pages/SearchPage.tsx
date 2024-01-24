@@ -6,11 +6,11 @@ import SearchPageVideoCard from "../components/SearchPageVideoCard";
 import {
   clearSearchResults,
   searchVideosAsync,
-} from "../store/slices/youtubeVideo/youtubeVideoSlice";
+} from "../store/slices/searchResult/searchResultSlice";
 
 const SearchPage = () => {
   const videoDetails = useSelector(
-    (state) => state.youtubeVideos.searchQueryResult?.items
+    (state) => state.searchResults?.searchResult?.items
   );
 
   const location = useLocation();

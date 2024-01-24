@@ -51,7 +51,7 @@ const YoutubeVideoCard = ({
               className="video-title"
               gutterBottom
               variant="body1"
-              component="a"
+              component="p"
               noWrap
             >
               {title}

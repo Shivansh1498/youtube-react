@@ -2,7 +2,12 @@ import { Avatar, Box, Container, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import VideoComment from "../components/VideoComment";
 import WatchPageVideoCard from "../components/WatchPageVideoCard";
+import {
+  commentsInfoArray,
+  fetchCommentsAsync,
+} from "../store/slices/commentThread/commentThreadSlice";
 import {
   clearChannelInfo,
   clearcurrentVideoDetail,
@@ -14,11 +19,6 @@ import {
 } from "../store/slices/currentVideo/currentVideoSlice";
 import { closeSidebar } from "../store/slices/header/headerSlice";
 import { formatYoutubeCount } from "../utils/helperFunctions";
-import {
-  commentsInfoArray,
-  fetchCommentsAsync,
-} from "../store/slices/commentThread/commentThreadSlice";
-import VideoComment from "../components/VideoComment";
 
 const VideoDetail = () => {
   const location = useLocation();

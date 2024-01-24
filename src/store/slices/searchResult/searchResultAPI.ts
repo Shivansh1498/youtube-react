@@ -1,9 +1,9 @@
 import youtubeAxios from "../../../utils/youtubeAxios";
 
-export const mostPopularVideos = async () => {
+export const searchVideos = async (queryString: string) => {
   try {
     const { data } = await youtubeAxios.get(
-      `/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&maxResults=10&key=${
+      `/search?part=snippet&maxResults=10&q=${queryString}&key=${
         import.meta.env.VITE_YOUTUBE_API_KEY
       }`
     );

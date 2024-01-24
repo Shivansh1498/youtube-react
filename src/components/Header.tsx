@@ -12,8 +12,8 @@ import { SearchLogo } from "../assets/svgs/SearchLogo";
 import { YoutubeLogo } from "../assets/svgs/YoutubeLogo";
 import { toggleSidebar } from "../store/slices/header/headerSlice";
 import { toggleTheme } from "../store/slices/theme/themeSlice";
-import { searchVideosAsync } from "../store/slices/youtubeVideo/youtubeVideoSlice";
 import ToggleThemeButton from "./ToggleThemeButton";
+import { searchVideosAsync } from "../store/slices/searchResult/searchResultSlice";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
