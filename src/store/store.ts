@@ -3,7 +3,7 @@ import themeSlice from "./slices/theme/themeSlice";
 import headerSlice from "./slices/header/headerSlice";
 import youtubeVideoSlice from "./slices/youtubeVideo/youtubeVideoSlice";
 import currentVideoSlice from "./slices/currentVideo/currentVideoSlice";
-// import commentThreadReducer from "./slices/commentThread/commentThreadSlice";
+import commentThreadSlice from "./slices/commentThread/commentThreadSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,7 +11,7 @@ const store = configureStore({
     header: headerSlice,
     youtubeVideos: youtubeVideoSlice,
     currentVideo: currentVideoSlice,
-    // commentSection: commentThreadReducer,
+    commentSection: commentThreadSlice,
   },
 });
 

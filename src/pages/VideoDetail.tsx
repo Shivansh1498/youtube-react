@@ -14,6 +14,11 @@ import {
 } from "../store/slices/currentVideo/currentVideoSlice";
 import { closeSidebar } from "../store/slices/header/headerSlice";
 import { formatYoutubeCount } from "../utils/helperFunctions";
+import {
+  commentsInfoArray,
+  fetchCommentsAsync,
+} from "../store/slices/commentThread/commentThreadSlice";
+import VideoComment from "../components/VideoComment";
 
 const VideoDetail = () => {
   const location = useLocation();
@@ -26,6 +31,7 @@ const VideoDetail = () => {
   const channelSubscriberCount = useSelector(
     currentVideoChannelSubscriberCount
   );
+  const commentList = useSelector(commentsInfoArray);
 
   const channelId = videoPlaying?.snippet?.channelId;
 
@@ -37,6 +43,7 @@ const VideoDetail = () => {
   useEffect(() => {
     dispatch(closeSidebar());
     dispatch(currentVideoDetailAsync(videoId));
+    dispatch(fetchCommentsAsync(videoId));
 
     return () => {
       dispatch(clearChannelInfo());
@@ -52,7 +59,7 @@ const VideoDetail = () => {
 
   return (
     <Container maxWidth="xl">
-      <Box mt={5} display={"flex"} sx={{ gap: 5 }}>
+      <Box my={5} display={"flex"} sx={{ gap: 5 }}>
         <Box maxWidth={900}>
           <iframe
             width={900}
@@ -77,6 +84,29 @@ const VideoDetail = () => {
               </Typography>
             </Box>
           </Stack>
+          <Box mt={3}>
+            <Stack spacing={5}>
+              <Typography variant="h6" component={"h6"}>
+                Top 10 Comments
+              </Typography>
+              {commentList?.slice(0, 10).map((comment) => (
+                <VideoComment
+                  key={comment?.id}
+                  authorName={
+                    comment?.snippet?.topLevelComment?.snippet
+                      ?.authorDisplayName
+                  }
+                  authorAvatar={
+                    comment?.snippet?.topLevelComment?.snippet
+                      ?.authorProfileImageUrl
+                  }
+                  authorComment={
+                    comment?.snippet?.topLevelComment?.snippet?.textOriginal
+                  }
+                />
+              ))}
+            </Stack>
+          </Box>
         </Box>
         <Stack spacing={3}>
           <WatchPageVideoCard />
