@@ -19,6 +19,7 @@ import {
 } from "../store/slices/currentVideo/currentVideoSlice";
 import { closeSidebar } from "../store/slices/header/headerSlice";
 import { formatYoutubeCount } from "../utils/helperFunctions";
+import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
 
 const VideoDetail = () => {
   const location = useLocation();
@@ -59,6 +60,7 @@ const VideoDetail = () => {
 
   return (
     <Container maxWidth="xl">
+      <SidebarOverlay />
       <Box my={5} display={"flex"} sx={{ gap: 5 }}>
         <Box maxWidth={900}>
           <iframe

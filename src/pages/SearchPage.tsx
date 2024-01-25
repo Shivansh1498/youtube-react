@@ -5,13 +5,18 @@ import { useLocation } from "react-router-dom";
 import SearchPageVideoCard from "../components/SearchPageVideoCard";
 import {
   clearSearchResults,
+  searchResultsLoading,
   searchVideosAsync,
 } from "../store/slices/searchResult/searchResultSlice";
+import SearchShimmerUI from "../components/ShimmerUI/SearchShimmerUI";
+import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
 
 const SearchPage = () => {
   const videoDetails = useSelector(
     (state) => state.searchResults?.searchResult?.items
   );
+
+  const searchResultsLoadingStatus = useSelector(searchResultsLoading);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -30,8 +35,19 @@ const SearchPage = () => {
     };
   }, []);
 
+  if (searchResultsLoadingStatus) {
+    return (
+      <Stack spacing={3} m={5}>
+        <SearchShimmerUI />
+        <SearchShimmerUI />
+        <SearchShimmerUI />
+      </Stack>
+    );
+  }
+
   return (
     <Box className="search-page-container" m={5} width={"100%"}>
+      <SidebarOverlay />
       <Stack spacing={3}>
         {videoDetails &&
           videoDetails.map((item) => (

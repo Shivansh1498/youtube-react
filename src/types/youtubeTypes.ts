@@ -67,6 +67,7 @@ export interface SidebarData {
 
 export interface SidebarOpenStatus {
   isSidebarOpen: boolean;
+  isOverlaySidebarOpen: boolean;
 }
 
 export interface HomeVideoCard {

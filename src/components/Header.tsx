@@ -3,11 +3,15 @@ import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HamburgerLogo } from "../assets/svgs/HamburgerLogo";
 import { SearchLogo } from "../assets/svgs/SearchLogo";
 import { YoutubeLogo } from "../assets/svgs/YoutubeLogo";
-import { toggleSidebar } from "../store/slices/header/headerSlice";
+import {
+  openOverlaySidebar,
+  toggleOverlaySidebar,
+  toggleSidebar,
+} from "../store/slices/header/headerSlice";
 import { searchVideosAsync } from "../store/slices/searchResult/searchResultSlice";
 import { toggleTheme } from "../store/slices/theme/themeSlice";
 import ToggleThemeButton from "./ToggleThemeButton";
@@ -15,6 +19,7 @@ import ToggleThemeButton from "./ToggleThemeButton";
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const theme = useTheme();
+  const location = useLocation();
 
   const {
     icon: { fill },
@@ -31,7 +36,11 @@ const Header = () => {
   const navigate = useNavigate();
 
   const isSidebarOpen = () => {
-    dispatch(toggleSidebar());
+    if (location.pathname === "/") {
+      dispatch(toggleSidebar());
+    } else {
+      dispatch(openOverlaySidebar());
+    }
   };
 
   function handleSearch(e: FormEvent<HTMLFormElement>): void {

@@ -30,7 +30,9 @@ const YoutubeVideoCard = ({
     <Link to={`/watch?v=${videoId}`}>
       <Card
         sx={{
-          maxWidth: 340,
+          minWidth: "280px",
+          width: "100%",
+          maxWidth: 380,
           "&:hover": {
             boxShadow: (theme) => theme.shadows[10], // Adjust the shadow level as needed
           },
@@ -40,11 +42,7 @@ const YoutubeVideoCard = ({
         className="card-container"
       >
         <span style={{ position: "relative" }}>
-          <CardMedia
-            sx={{ width: "350px", height: "225px" }}
-            image={imageUrl}
-            title={""}
-          />
+          <CardMedia sx={{ height: "225px" }} image={imageUrl} title={""} />
           <span className="video-timespan-badge">{videoDuration}</span>
         </span>
         <CardContent>

@@ -39,4 +39,6 @@ const searchResultSlice = createSlice({
 
 export const { clearSearchResults } = searchResultSlice.actions;
 
+export const searchResultsLoading = (state) => state?.searchResults?.loading;
+
 export default searchResultSlice.reducer;

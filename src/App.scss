@@ -11,12 +11,9 @@
 
   .middle-section {
     @include flexbox;
-    flex: 0 1 632px;
 
     > input[type="text"] {
-      max-width: 700px;
-      width: 550px;
-      min-width: 300px;
+      width: 40vw;
       height: 40px;
       outline: none;
       border-width: 1px;
@@ -52,15 +49,6 @@
 
 .main-container {
   display: flex;
-}
-
-// Home Container
-
-.home-container {
-  padding: 20px 30px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
 }
 
 // Card Container
