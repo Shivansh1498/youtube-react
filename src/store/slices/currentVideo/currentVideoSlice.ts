@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { currentVideoChannelInfo, currentVideoDetail } from "./currentVideoApi";
+import { GlobalState } from "../../../types/globalTypes";
+import { currentVideoChannelInfo, currentVideoDetail } from "./currentVideoAPI";
 
 const initialState = {
   currentVideoDetail: {},
   channelInfo: {},
   loading: false,
-  error: null,
+  error: null as unknown,
 };
 
 export const currentVideoChannelInfoAsync = createAsyncThunk(
@@ -49,7 +50,7 @@ const currentVideoSlice = createSlice({
       })
       .addCase(currentVideoChannelInfoAsync.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error;
+        state.error = action.payload;
       })
       .addCase(currentVideoDetailAsync.pending, (state) => {
         state.loading = true;
@@ -71,14 +72,14 @@ export const {
   clearcurrentVideoDetail,
 } = currentVideoSlice.actions;
 
-export const currentVideoChannelName = (state) =>
+export const currentVideoChannelName = (state: GlobalState) =>
   state.currentVideo?.channelInfo?.items?.[0]?.snippet?.title;
 
-export const currentVideoChannelLogo = (state) =>
+export const currentVideoChannelLogo = (state: GlobalState) =>
   state.currentVideo?.channelInfo?.items?.[0]?.snippet?.thumbnails?.default
     ?.url;
 
-export const currentVideoChannelSubscriberCount = (state) =>
+export const currentVideoChannelSubscriberCount = (state: GlobalState) =>
   state.currentVideo?.channelInfo?.items?.[0]?.statistics?.subscriberCount;
 
 export default currentVideoSlice.reducer;

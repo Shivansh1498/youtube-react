@@ -1,6 +1,4 @@
-import { SidebarData } from "../types/youtubeTypes";
-
-export const sidebarData: SidebarData[] = [
+export const sidebarData = [
   {
     label: "Home",
     icon: (

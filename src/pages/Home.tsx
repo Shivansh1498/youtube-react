@@ -1,15 +1,14 @@
 import { Stack } from "@mui/material";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
 import YoutubeVideoCard from "../components/YoutubeVideoCard";
 import { openSidebar } from "../store/slices/header/headerSlice";
 import { mostPopularVideosAsync } from "../store/slices/youtubeVideo/youtubeVideoSlice";
-import { IRootState } from "../store/store";
-import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
+import { useAppDispatch, useAppSelector } from "../types/globalTypes";
 
 const Home = () => {
-  const videos = useSelector<IRootState>((state) => state.youtubeVideos.video);
-  const dispatch = useDispatch();
+  const videos = useAppSelector((state) => state.youtubeVideos.video);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(openSidebar());
@@ -25,8 +24,8 @@ const Home = () => {
       spacing={3}
       p={3}
     >
-      {videos?.items.length &&
-        videos?.items.map((video, index) => (
+      {!!videos?.length &&
+        videos?.map((video: any) => (
           <YoutubeVideoCard
             key={video.id}
             videoId={video.id}

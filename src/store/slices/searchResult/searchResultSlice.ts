@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { searchVideos } from "./searchResultAPI";
+import { GlobalState } from "../../../types/globalTypes";
 
 const initialState = {
   searchResult: {},
   loading: false,
-  error: null,
+  error: null as unknown,
 };
 
 export const searchVideosAsync = createAsyncThunk(
@@ -39,6 +40,7 @@ const searchResultSlice = createSlice({
 
 export const { clearSearchResults } = searchResultSlice.actions;
 
-export const searchResultsLoading = (state) => state?.searchResults?.loading;
+export const searchResultsLoading = (state: GlobalState) =>
+  state?.searchResults?.loading;
 
 export default searchResultSlice.reducer;

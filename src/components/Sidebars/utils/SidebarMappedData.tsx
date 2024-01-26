@@ -4,8 +4,8 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import { useTheme } from "@mui/system";
 import { sidebarData } from "../../../utils/sidebarData";
-import { useTheme } from "@emotion/react";
 
 const SidebarMappedData = () => {
   const theme = useTheme();

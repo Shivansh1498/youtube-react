@@ -1,4 +1,4 @@
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { CssBaseline, PaletteMode, ThemeProvider } from "@mui/material";
 import { Suspense, lazy } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -6,6 +6,8 @@ import "./App.scss";
 import Header from "./components/Header";
 import SidebarHomePage from "./components/Sidebars/SidebarHomePage";
 import { getDesignTokens } from "./themes/globalThemePalette";
+import { IRootState } from "./store/store";
+import { createTheme } from "@mui/material/styles";
 
 // Importing Pages Using Lazy Loading
 const Home = lazy(() => import("./pages/Home"));
@@ -14,7 +16,9 @@ const SearchPage = lazy(() => import("./pages/SearchPage"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 
 const App = () => {
-  const mode = useSelector((state) => state.theme.mode);
+  const mode: PaletteMode = useSelector<IRootState>(
+    (state) => state.theme.mode
+  ) as PaletteMode;
 
   const theme = createTheme(getDesignTokens(mode));
 

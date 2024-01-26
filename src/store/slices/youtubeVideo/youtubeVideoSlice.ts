@@ -1,43 +1,39 @@
-import { AsyncThunk, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { VideoState } from "../../../types/youtubeTypes";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { mostPopularVideos } from "./youtubeVideoSliceAPI";
 
-interface AsyncThunkConfig {}
-
-const initialState: VideoState = {
-  video: null,
+const initialState = {
+  video: [],
   loading: false,
-  error: null,
+  error: null as unknown,
 };
 
-export const mostPopularVideosAsync: AsyncThunk<any, void, AsyncThunkConfig> =
-  createAsyncThunk("youtubeVideo/mostPopularVideos", async () => {
+export const mostPopularVideosAsync = createAsyncThunk(
+  "youtubeVideo/mostPopularVideos",
+  async () => {
     return await mostPopularVideos();
-  });
+  }
+);
 
 const youtubeVideoSlice = createSlice({
   name: "youtubeVideo",
   initialState,
   reducers: {
-    clearYouTubeVideo: (state: VideoState) => {
-      state.video = null;
+    clearYouTubeVideo: (state) => {
+      state.video = [];
       state.loading = false;
       state.error = null;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(mostPopularVideosAsync.pending, (state: VideoState) => {
+      .addCase(mostPopularVideosAsync.pending, (state) => {
         state.loading = true;
       })
-      .addCase(
-        mostPopularVideosAsync.fulfilled,
-        (state: VideoState, action) => {
-          state.loading = false;
-          state.video = action.payload;
-        }
-      )
-      .addCase(mostPopularVideosAsync.rejected, (state: VideoState, action) => {
+      .addCase(mostPopularVideosAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.video = action.payload;
+      })
+      .addCase(mostPopularVideosAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

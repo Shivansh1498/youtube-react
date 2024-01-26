@@ -3,15 +3,15 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/system";
 import { Link } from "react-router-dom";
 import { VerifiedIcon } from "../assets/svgs/VerifiedIcon";
-import { HomeVideoCard } from "../types/youtubeTypes";
 import {
   convertDurationToTime,
   formatYoutubeCount,
   timeSincePublished,
 } from "../utils/helperFunctions";
-import { useTheme } from "@emotion/react";
+import { YoutubeVideoCardProps } from "../types/propTypes";
 
 const YoutubeVideoCard = ({
   imageUrl,
@@ -22,7 +22,7 @@ const YoutubeVideoCard = ({
   timeAgo,
   videoId,
   videoLength,
-}: HomeVideoCard) => {
+}: YoutubeVideoCardProps) => {
   const videoDuration = convertDurationToTime(videoLength);
   const theme = useTheme();
 

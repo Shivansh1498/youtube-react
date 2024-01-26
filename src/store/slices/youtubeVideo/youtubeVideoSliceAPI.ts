@@ -7,7 +7,7 @@ export const mostPopularVideos = async () => {
         import.meta.env.VITE_YOUTUBE_API_KEY
       }`
     );
-    return data;
+    return data.items;
   } catch (error) {
     console.log(error);
   }

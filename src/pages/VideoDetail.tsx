@@ -1,7 +1,8 @@
 import { Avatar, Box, Container, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
 import VideoComment from "../components/VideoComment";
 import WatchPageVideoCard from "../components/WatchPageVideoCard";
 import {
@@ -18,14 +19,14 @@ import {
   currentVideoDetailAsync,
 } from "../store/slices/currentVideo/currentVideoSlice";
 import { closeSidebar } from "../store/slices/header/headerSlice";
+import { GlobalState, useAppDispatch } from "../types/globalTypes";
 import { formatYoutubeCount } from "../utils/helperFunctions";
-import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
 
 const VideoDetail = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const videoPlaying = useSelector(
-    (state) => state.currentVideo?.currentVideoDetail
+    (state: GlobalState) => state.currentVideo?.currentVideoDetail
   );
   const channelName = useSelector(currentVideoChannelName);
   const channelLogo = useSelector(currentVideoChannelLogo);
@@ -43,8 +44,10 @@ const VideoDetail = () => {
 
   useEffect(() => {
     dispatch(closeSidebar());
-    dispatch(currentVideoDetailAsync(videoId));
-    dispatch(fetchCommentsAsync(videoId));
+    if (typeof videoId === "string") {
+      dispatch(currentVideoDetailAsync(videoId));
+      dispatch(fetchCommentsAsync(videoId));
+    }
 
     return () => {
       dispatch(clearChannelInfo());
@@ -62,10 +65,10 @@ const VideoDetail = () => {
     <Container maxWidth="xl">
       <SidebarOverlay />
       <Box my={5} display={"flex"} sx={{ gap: 5 }}>
-        <Box maxWidth={900}>
+        <Box minWidth={900}>
           <iframe
-            width={900}
-            height={515}
+            width={"100%"}
+            style={{ aspectRatio: "16/9" }}
             frameBorder={0}
             src={`https://www.youtube.com/embed/${videoId}?si=nNmzmkiab194pbnF&autoplay=1`}
             title="YouTube video player"

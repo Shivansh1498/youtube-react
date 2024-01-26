@@ -1,5 +1,6 @@
-import { useTheme } from "@emotion/react";
+// import { useTheme } from "@emotion/react";
 import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
+import { useTheme } from "@mui/system";
 import { ThunkDispatch } from "@reduxjs/toolkit";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -9,7 +10,6 @@ import { SearchLogo } from "../assets/svgs/SearchLogo";
 import { YoutubeLogo } from "../assets/svgs/YoutubeLogo";
 import {
   openOverlaySidebar,
-  toggleOverlaySidebar,
   toggleSidebar,
 } from "../store/slices/header/headerSlice";
 import { searchVideosAsync } from "../store/slices/searchResult/searchResultSlice";

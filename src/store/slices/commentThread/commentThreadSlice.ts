@@ -2,6 +2,7 @@
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchComments } from "./commentThreadAPI";
+import { GlobalState } from "../../../types/globalTypes";
 
 export const fetchCommentsAsync = createAsyncThunk(
   "comments/fetchComments",
@@ -15,7 +16,7 @@ const commentsSlice = createSlice({
   initialState: {
     comments: [],
     status: "idle",
-    error: null,
+    error: null as unknown,
   },
   reducers: {
     clearComments: (state) => {
@@ -41,6 +42,5 @@ const commentsSlice = createSlice({
 export const { clearComments } = commentsSlice.actions;
 export default commentsSlice.reducer;
 
-export const selectComments = (state) => state.comments.comments;
-export const commentsInfoArray = (state) =>
+export const commentsInfoArray = (state: GlobalState) =>
   state?.commentSection?.comments?.items;

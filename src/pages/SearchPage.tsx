@@ -1,20 +1,22 @@
 import { Box, Stack } from "@mui/material";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import SearchPageVideoCard from "../components/SearchPageVideoCard";
+import SearchShimmerUI from "../components/ShimmerUI/SearchShimmerUI";
+import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
 import {
   clearSearchResults,
   searchResultsLoading,
   searchVideosAsync,
 } from "../store/slices/searchResult/searchResultSlice";
-import SearchShimmerUI from "../components/ShimmerUI/SearchShimmerUI";
-import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
+import { GlobalState, useAppDispatch } from "../types/globalTypes";
+import { Item } from "../types/searchResultsType";
 
 const SearchPage = () => {
-  const videoDetails = useSelector(
+  const videoDetails: Item[] = useSelector<GlobalState>(
     (state) => state.searchResults?.searchResult?.items
-  );
+  ) as Item[];
 
   const searchResultsLoadingStatus = useSelector(searchResultsLoading);
 
@@ -23,7 +25,7 @@ const SearchPage = () => {
 
   // Example: Get the value of the 'v' parameter
   const searchQuery = queryParams.get("search_query")!;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (searchQuery.trim().length > 0) {
@@ -58,9 +60,7 @@ const SearchPage = () => {
               description={item.snippet.description}
               thumbnail={item.snippet.thumbnails.high.url}
               channelTitle={item.snippet.channelTitle}
-              noOfViews={""}
               uplodedHowLongAgo={item.snippet.publishedAt}
-              isVerified={""}
             />
           ))}
       </Stack>

@@ -8,22 +8,20 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { VerifiedIcon } from "../assets/svgs/VerifiedIcon";
-import { SearchPageVideoCardProps } from "../types/youtubeTypes";
-import { timeSincePublished } from "../utils/helperFunctions";
+import { useTheme } from "@mui/system";
 import { Link } from "react-router-dom";
-import { useTheme } from "@emotion/react";
+import { VerifiedIcon } from "../assets/svgs/VerifiedIcon";
+import { timeSincePublished } from "../utils/helperFunctions";
+import { SearchPageVideoCardProps } from "../types/propTypes";
 
 const SearchPageVideoCard = ({
   thumbnail,
   title,
   description,
   channelTitle,
-  // noOfViews,
   uplodedHowLongAgo,
   videoId,
-}: // isVerified,
-SearchPageVideoCardProps) => {
+}: SearchPageVideoCardProps) => {
   const theme = useTheme();
   return (
     <Link to={`/watch?v=${videoId}`}>

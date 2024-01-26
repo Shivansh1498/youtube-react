@@ -1,9 +1,9 @@
 // Import necessary dependencies
-import { useTheme } from "@emotion/react";
 import { IconButton } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
+import { useTheme } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { HamburgerLogo } from "../../assets/svgs/HamburgerLogo";

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SidebarOpenStatus } from "../../../types/youtubeTypes";
+import { GlobalState } from "../../../types/globalTypes";
 
-const initialState: SidebarOpenStatus = {
+const initialState = {
   isSidebarOpen: true,
   isOverlaySidebarOpen: false,
 };
@@ -10,22 +10,22 @@ const headerSlice = createSlice({
   name: "header",
   initialState,
   reducers: {
-    openSidebar: (state: SidebarOpenStatus) => {
+    openSidebar: (state) => {
       state.isSidebarOpen = true;
     },
-    closeSidebar: (state: SidebarOpenStatus) => {
+    closeSidebar: (state) => {
       state.isSidebarOpen = false;
     },
-    toggleSidebar: (state: SidebarOpenStatus) => {
+    toggleSidebar: (state) => {
       state.isSidebarOpen = !state.isSidebarOpen;
     },
-    openOverlaySidebar: (state: SidebarOpenStatus) => {
+    openOverlaySidebar: (state) => {
       state.isOverlaySidebarOpen = true;
     },
-    closeOverlaySidebar: (state: SidebarOpenStatus) => {
+    closeOverlaySidebar: (state) => {
       state.isOverlaySidebarOpen = false;
     },
-    toggleOverlaySidebar: (state: SidebarOpenStatus) => {
+    toggleOverlaySidebar: (state) => {
       state.isOverlaySidebarOpen = !state.isOverlaySidebarOpen;
     },
   },
@@ -40,7 +40,7 @@ export const {
   toggleOverlaySidebar,
 } = headerSlice.actions;
 
-export const isOverlaySidebarStatus = (state) =>
+export const isOverlaySidebarStatus = (state: GlobalState) =>
   state.header.isOverlaySidebarOpen;
 
 export default headerSlice.reducer;
