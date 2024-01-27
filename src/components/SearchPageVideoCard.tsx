@@ -28,7 +28,8 @@ const SearchPageVideoCard = ({
       <Card
         sx={{
           display: "flex",
-          width: "100%",
+          flexDirection: { sm: "row", xs: "column" },
+          // width: { md: "100%", xs: 250 },
           "&:hover": {
             boxShadow: (theme) => theme.shadows[10], // Adjust the shadow level as needed
           },
@@ -40,7 +41,10 @@ const SearchPageVideoCard = ({
         <Box className="search-page-video-card">
           <CardMedia
             component="img"
-            sx={{ width: 371, objectFit: "contain" }}
+            sx={{
+              objectFit: "cover",
+              minWidth: 350,
+            }}
             image={thumbnail}
             alt="Live from space album cover"
           />

@@ -8,6 +8,7 @@ import SidebarHomePage from "./components/Sidebars/SidebarHomePage";
 import { getDesignTokens } from "./themes/globalThemePalette";
 import { IRootState } from "./store/store";
 import { createTheme } from "@mui/material/styles";
+import YoutubePageLoading from "./components/SkeletonLoading";
 
 // Importing Pages Using Lazy Loading
 const Home = lazy(() => import("./pages/Home"));
@@ -25,12 +26,10 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-
       <BrowserRouter>
         <Header />
         <main className="main-container">
-          {/* <div>{isSidebarOpen && <Sidebar />}</div> */}
-          <Suspense fallback={"loading..."}>
+          <Suspense fallback={<YoutubePageLoading />}>
             <Routes>
               <Route path="/" element={<SidebarHomePage />}>
                 <Route index element={<Home />} />

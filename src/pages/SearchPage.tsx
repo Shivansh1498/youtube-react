@@ -28,7 +28,7 @@ const SearchPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (searchQuery.trim().length > 0) {
+    if (searchQuery?.trim()?.length > 0) {
       dispatch(searchVideosAsync(searchQuery));
     }
 

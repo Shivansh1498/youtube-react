@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import { useEffect } from "react";
 import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
 import YoutubeVideoCard from "../components/YoutubeVideoCard";
-import { openSidebar } from "../store/slices/header/headerSlice";
+// import { openSidebar } from "../store/slices/header/headerSlice";
 import { mostPopularVideosAsync } from "../store/slices/youtubeVideo/youtubeVideoSlice";
 import { useAppDispatch, useAppSelector } from "../types/globalTypes";
 
@@ -11,7 +11,7 @@ const Home = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(openSidebar());
+    // dispatch(openSidebar());
     dispatch(mostPopularVideosAsync());
   }, []);
 

@@ -1,14 +1,31 @@
-import { Stack } from "@mui/material";
-import Skeleton from "@mui/material/Skeleton";
+import { Container, Stack } from "@mui/material";
+import { YoutubeLogo } from "../assets/svgs/YoutubeLogo";
+import { useTheme } from "@mui/system";
 
-const SkeletonLoading = () => {
+const YoutubePageLoading = () => {
+  const theme = useTheme();
   return (
-    <Stack direction={"column"} spacing={1}>
-      <Skeleton width={"340px"} height={"500px"} />
-      <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
-      <Skeleton variant="text" sx={{ fontSize: "1rem" }} />
-    </Stack>
+    <Container maxWidth="xs">
+      <Stack
+        direction={"column"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        mt={25}
+        spacing={3}
+      >
+        <div style={{ fill: theme.palette.icon.fill }}>{YoutubeLogo}</div>
+        <div className="loader">
+          <span className="loader__element"></span>
+          <span className="loader__element"></span>
+          <span className="loader__element"></span>
+          <span className="loader__element"></span>
+          <span className="loader__element"></span>
+          <span className="loader__element"></span>
+          <span className="loader__element"></span>
+        </div>
+      </Stack>
+    </Container>
   );
 };
 
-export default SkeletonLoading;
+export default YoutubePageLoading;
