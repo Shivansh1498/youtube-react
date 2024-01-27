@@ -21,6 +21,8 @@ const Header = () => {
   const theme = useTheme();
   const location = useLocation();
 
+  let currentTheme = localStorage.getItem("theme") === "dark";
+
   const {
     icon: { fill },
     appbar: {
@@ -115,7 +117,10 @@ const Header = () => {
             </div>
           </form>
           <div className="right-section">
-            <ToggleThemeButton onChange={handleThemeChange} />
+            <ToggleThemeButton
+              checked={currentTheme}
+              onChange={handleThemeChange}
+            />
           </div>
         </Toolbar>
       </AppBar>
