@@ -1,4 +1,4 @@
-import { Avatar, Box, Container, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Container, Grid, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -62,33 +62,35 @@ const VideoDetail = () => {
   }, [channelId]);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="xl" sx={{ marginBottom: 10 }}>
       <SidebarOverlay />
-      <Box my={5} display={"flex"} sx={{ gap: 5 }}>
-        <Box minWidth={900}>
-          <iframe
-            width={"100%"}
-            style={{ aspectRatio: "16/9" }}
-            frameBorder={0}
-            src={`https://www.youtube.com/embed/${videoId}?si=nNmzmkiab194pbnF&autoplay=1`}
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          />
-          <Typography variant="h5" component={"p"}>
-            {videoPlaying?.snippet?.title}
-          </Typography>
-          <Stack direction={"row"} alignItems={"center"} spacing={1} mt={2}>
-            <Avatar alt="" src={channelLogo} />
-            <Box>
-              <Typography variant="body1" component={"p"}>
-                {channelName}
-              </Typography>
-              <Typography variant="body2" component={"p"}>
-                {formatYoutubeCount(channelSubscriberCount)} subscribers
-              </Typography>
-            </Box>
-          </Stack>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={8}>
+          <Box>
+            <iframe
+              width={"100%"}
+              style={{ aspectRatio: "16/9" }}
+              frameBorder={0}
+              src={`https://www.youtube.com/embed/${videoId}?si=nNmzmkiab194pbnF&autoplay=1`}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+            <Typography variant="h5" component={"p"}>
+              {videoPlaying?.snippet?.title}
+            </Typography>
+            <Stack direction={"row"} alignItems={"center"} spacing={1} mt={2}>
+              <Avatar alt="" src={channelLogo} />
+              <Box>
+                <Typography variant="body1" component={"p"}>
+                  {channelName}
+                </Typography>
+                <Typography variant="body2" component={"p"}>
+                  {formatYoutubeCount(channelSubscriberCount)} subscribers
+                </Typography>
+              </Box>
+            </Stack>
+          </Box>
           <Box mt={3}>
             <Stack spacing={5}>
               <Typography variant="h6" component={"h6"}>
@@ -112,13 +114,18 @@ const VideoDetail = () => {
               ))}
             </Stack>
           </Box>
-        </Box>
-        <Stack spacing={3}>
-          <WatchPageVideoCard />
-          <WatchPageVideoCard />
-          <WatchPageVideoCard />
-        </Stack>
-      </Box>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Stack spacing={3}>
+            <WatchPageVideoCard />
+            <WatchPageVideoCard />
+            <WatchPageVideoCard />
+            <WatchPageVideoCard />
+            <WatchPageVideoCard />
+            <WatchPageVideoCard />
+          </Stack>
+        </Grid>
+      </Grid>
     </Container>
   );
 };

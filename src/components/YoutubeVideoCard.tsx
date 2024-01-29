@@ -27,16 +27,16 @@ const YoutubeVideoCard = ({
   const theme = useTheme();
 
   return (
-    <Link to={`/watch?v=${videoId}`}>
+    <Link
+      to={`/watch?v=${videoId}`}
+      style={{ flexGrow: 1, flexShrink: 0, flexBasis: 300, maxWidth: 350 }}
+    >
       <Card
         sx={{
-          minWidth: "280px",
-          width: "100%",
-          maxWidth: 380,
           "&:hover": {
             boxShadow: (theme) => theme.shadows[10], // Adjust the shadow level as needed
           },
-
+          height: "350px",
           cursor: "pointer",
         }}
         className="card-container"

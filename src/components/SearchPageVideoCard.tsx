@@ -29,7 +29,7 @@ const SearchPageVideoCard = ({
         sx={{
           display: "flex",
           flexDirection: { sm: "row", xs: "column" },
-          // width: { md: "100%", xs: 250 },
+          width: { sm: "100%", xs: 300 },
           "&:hover": {
             boxShadow: (theme) => theme.shadows[10], // Adjust the shadow level as needed
           },
@@ -43,7 +43,7 @@ const SearchPageVideoCard = ({
             component="img"
             sx={{
               objectFit: "cover",
-              minWidth: 350,
+              width: { xs: 300, md: 350 },
             }}
             image={thumbnail}
             alt="Live from space album cover"

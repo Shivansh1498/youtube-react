@@ -19,6 +19,7 @@ const Home = () => {
     <Stack
       direction={"row"}
       flexWrap={"wrap"}
+      justifyContent={{ sm: "center", md: "flex-start" }}
       m={5}
       useFlexGap
       spacing={3}
