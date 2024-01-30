@@ -1,8 +1,14 @@
-import { AppBar, Box, Button, IconButton, Toolbar } from "@mui/material";
+import {
+  AppBar,
+  Autocomplete,
+  Box,
+  Button,
+  IconButton,
+  Toolbar,
+  useMediaQuery,
+} from "@mui/material";
 import { useTheme } from "@mui/system";
-import { ThunkDispatch } from "@reduxjs/toolkit";
-import { FormEvent, useState } from "react";
-import { useDispatch } from "react-redux";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HamburgerLogo } from "../assets/svgs/HamburgerLogo";
 import { SearchLogo } from "../assets/svgs/SearchLogo";
@@ -13,12 +19,19 @@ import {
 } from "../store/slices/header/headerSlice";
 import { searchVideosAsync } from "../store/slices/searchResult/searchResultSlice";
 import { toggleTheme } from "../store/slices/theme/themeSlice";
+import { useAppDispatch } from "../types/globalTypes";
+import { googleAutoSuggestion } from "../utils/googleAutoSuggestion";
 import ToggleThemeButton from "./ToggleThemeButton";
+
+// const customOptions: string[] = ["theme", "workspace", "learning"];
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchOptions, setSearchOptions] = useState<string[]>([]);
+  const [isOptionbarOpen, setisOptionbarOpen] = useState<boolean>(false);
   const theme = useTheme();
   const location = useLocation();
+  const equalOrAboveTabletWidth = useMediaQuery("(min-width:768px)");
 
   let currentTheme = localStorage.getItem("theme") === "dark";
 
@@ -33,11 +46,11 @@ const Header = () => {
     },
   } = theme.palette;
 
-  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const isSidebarOpen = () => {
-    if (location.pathname === "/") {
+    if (location.pathname === "/" && equalOrAboveTabletWidth) {
       dispatch(toggleSidebar());
     } else {
       dispatch(openOverlaySidebar());
@@ -45,14 +58,46 @@ const Header = () => {
   };
 
   function handleSearch(e: FormEvent<HTMLFormElement>): void {
-    e.preventDefault();
-    dispatch(searchVideosAsync(searchQuery));
-    navigate(`/results?search_query=${searchQuery}`);
+    if (e && e.preventDefault) {
+      e.preventDefault();
+      dispatch(searchVideosAsync(searchQuery));
+      navigate(`/results?search_query=${searchQuery}`);
+    }
   }
 
   function handleThemeChange(): void {
     dispatch(toggleTheme());
   }
+
+  function handleOptionsSearch(e: any): void {
+    setSearchQuery(e.target.textContent);
+    dispatch(searchVideosAsync(e.target.textContent));
+    navigate(`/results?search_query=${e.target.textContent}`);
+    setisOptionbarOpen(false);
+  }
+
+  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
+    setSearchQuery(e.target.value);
+    setisOptionbarOpen(true);
+  }
+
+  useEffect(() => {
+    let timmer = setTimeout(() => {
+      if (searchQuery.length > 0) {
+        async function fn() {
+          setSearchOptions(await googleAutoSuggestion(searchQuery));
+        }
+        fn();
+      } else {
+        setSearchOptions([]);
+      }
+    }, 800);
+
+    return () => {
+      clearTimeout(timmer);
+      setSearchOptions([]);
+    };
+  }, [searchQuery]);
 
   return (
     <Box
@@ -92,20 +137,41 @@ const Header = () => {
           </div>
           <form onSubmit={handleSearch}>
             <div className="middle-section">
-              <input
-                type="text"
-                name="searchText"
+              <Autocomplete
+                disableClearable
+                onBlur={() => setisOptionbarOpen(false)}
+                open={isOptionbarOpen}
                 id="searchText"
-                placeholder="Search"
-                autoComplete={"off"}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                style={{
-                  borderColor: border,
-                  backgroundColor: inputBackground,
-                  color: inputColor,
-                }}
+                options={searchOptions}
+                renderOption={(props, option) => (
+                  <li {...props} onClick={handleOptionsSearch}>
+                    <span style={{ fill: fill, marginRight: 7, width: "27px" }}>
+                      {SearchLogo}
+                    </span>
+                    {option}
+                  </li>
+                )}
+                renderInput={(params) => (
+                  <div ref={params.InputProps.ref}>
+                    <input
+                      {...params.inputProps}
+                      type="text"
+                      name="searchText"
+                      id="searchText"
+                      placeholder="Search"
+                      autoComplete={"off"}
+                      value={searchQuery}
+                      onChange={handleInputChange}
+                      style={{
+                        borderColor: border,
+                        backgroundColor: inputBackground,
+                        color: inputColor,
+                      }}
+                    />
+                  </div>
+                )}
               />
+
               <Button
                 className="search-btn"
                 type="submit"

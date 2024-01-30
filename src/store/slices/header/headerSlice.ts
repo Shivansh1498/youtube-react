@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { GlobalState } from "../../../types/globalTypes";
 
 const initialState = {
-  isSidebarOpen: true,
+  isSidebarOpen: false,
   isOverlaySidebarOpen: false,
 };
 
