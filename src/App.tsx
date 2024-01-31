@@ -1,5 +1,5 @@
 import { CssBaseline, PaletteMode, ThemeProvider } from "@mui/material";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
@@ -9,6 +9,8 @@ import { getDesignTokens } from "./themes/globalThemePalette";
 import { IRootState } from "./store/store";
 import { createTheme } from "@mui/material/styles";
 import YoutubePageLoading from "./components/SkeletonLoading";
+import { mostPopularVideosAsync } from "./store/slices/youtubeVideo/youtubeVideoSlice";
+import { useAppDispatch, useAppSelector } from "./types/globalTypes";
 
 // Importing Pages Using Lazy Loading
 const Home = lazy(() => import("./pages/Home"));
@@ -20,8 +22,18 @@ const App = () => {
   const mode: PaletteMode = useSelector<IRootState>(
     (state) => state.theme.mode
   ) as PaletteMode;
+  const dispatch = useAppDispatch();
+  const youtubeVideosList = useAppSelector(
+    (state) => state.youtubeVideos.video
+  );
 
   const theme = createTheme(getDesignTokens(mode));
+
+  useEffect(() => {
+    if (!youtubeVideosList.length) {
+      dispatch(mostPopularVideosAsync());
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>

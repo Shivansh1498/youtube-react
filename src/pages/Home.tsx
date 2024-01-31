@@ -1,19 +1,10 @@
 import { Stack } from "@mui/material";
-import { useEffect } from "react";
 import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
 import YoutubeVideoCard from "../components/YoutubeVideoCard";
-// import { openSidebar } from "../store/slices/header/headerSlice";
-import { mostPopularVideosAsync } from "../store/slices/youtubeVideo/youtubeVideoSlice";
-import { useAppDispatch, useAppSelector } from "../types/globalTypes";
+import { useAppSelector } from "../types/globalTypes";
 
 const Home = () => {
   const videos = useAppSelector((state) => state.youtubeVideos.video);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    // dispatch(openSidebar());
-    dispatch(mostPopularVideosAsync());
-  }, []);
 
   return (
     <Stack

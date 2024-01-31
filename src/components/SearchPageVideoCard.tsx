@@ -48,7 +48,7 @@ const SearchPageVideoCard = ({
             image={thumbnail}
             alt="Live from space album cover"
           />
-          <span className="video-timespan-badge">10:40</span>
+          {/* <span className="video-timespan-badge">10:40</span> */}
         </Box>
         <Box>
           <CardContent
@@ -69,11 +69,11 @@ const SearchPageVideoCard = ({
                 {title}
               </Typography>
               <Typography component={"span"} variant="body2">
-                57M views • {timeSincePublished(uplodedHowLongAgo)}
+                {timeSincePublished(uplodedHowLongAgo)}
               </Typography>
             </Box>
             <Stack direction={"row"} alignItems={"center"} spacing={1}>
-              <Avatar
+              {/* <Avatar
                 alt="Cindy Baker"
                 src="https://mui.com/static/images/avatar/3.jpg"
                 sx={{
@@ -81,7 +81,7 @@ const SearchPageVideoCard = ({
                   height: "28px",
                   width: "28px",
                 }}
-              />
+              /> */}
               <Typography
                 variant="body2"
                 color="text.secondary"

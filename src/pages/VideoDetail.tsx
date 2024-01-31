@@ -19,10 +19,15 @@ import {
   currentVideoDetailAsync,
 } from "../store/slices/currentVideo/currentVideoSlice";
 import { closeSidebar } from "../store/slices/header/headerSlice";
-import { GlobalState, useAppDispatch } from "../types/globalTypes";
+import {
+  GlobalState,
+  useAppDispatch,
+  useAppSelector,
+} from "../types/globalTypes";
 import { formatYoutubeCount } from "../utils/helperFunctions";
 
 const VideoDetail = () => {
+  const videos = useAppSelector((state) => state.youtubeVideos.video);
   const location = useLocation();
   const dispatch = useAppDispatch();
   const videoPlaying = useSelector(
@@ -62,10 +67,14 @@ const VideoDetail = () => {
   }, [channelId]);
 
   return (
-    <Container maxWidth="xl" sx={{ marginBottom: 10 }}>
+    <Container
+      maxWidth="xl"
+      sx={{ marginBottom: 10 }}
+      className="watchPageContainer"
+    >
       <SidebarOverlay />
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
+      <Grid container spacing={3} mt={2}>
+        <Grid item xs={12} sm={7} md={8}>
           <Box>
             <iframe
               width={"100%"}
@@ -115,14 +124,22 @@ const VideoDetail = () => {
             </Stack>
           </Box>
         </Grid>
-        <Grid item xs={12} md={4}>
-          <Stack spacing={3}>
-            <WatchPageVideoCard />
-            <WatchPageVideoCard />
-            <WatchPageVideoCard />
-            <WatchPageVideoCard />
-            <WatchPageVideoCard />
-            <WatchPageVideoCard />
+        <Grid item xs={12} sm={5} md={4}>
+          <Stack spacing={1}>
+            {!!videos?.length &&
+              videos?.map((video: any) => (
+                <WatchPageVideoCard
+                  key={video.id}
+                  videoId={video.id}
+                  imageUrl={video.snippet.thumbnails.high.url}
+                  title={video.snippet.title}
+                  channelName={video.snippet.channelTitle}
+                  isVerified={video.contentDetails.licensedContent}
+                  viewCount={video.statistics.viewCount}
+                  videoLength={video.contentDetails.duration}
+                  timeAgo={video.snippet.publishedAt}
+                />
+              ))}
           </Stack>
         </Grid>
       </Grid>
