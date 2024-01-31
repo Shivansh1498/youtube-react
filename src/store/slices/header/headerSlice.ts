@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { GlobalState } from "../../../types/globalTypes";
 
 const initialState = {
-  isSidebarOpen: false,
+  // isSidebarOpen: false,
   isOverlaySidebarOpen: false,
 };
 
@@ -10,15 +10,6 @@ const headerSlice = createSlice({
   name: "header",
   initialState,
   reducers: {
-    openSidebar: (state) => {
-      state.isSidebarOpen = true;
-    },
-    closeSidebar: (state) => {
-      state.isSidebarOpen = false;
-    },
-    toggleSidebar: (state) => {
-      state.isSidebarOpen = !state.isSidebarOpen;
-    },
     openOverlaySidebar: (state) => {
       state.isOverlaySidebarOpen = true;
     },
@@ -31,14 +22,8 @@ const headerSlice = createSlice({
   },
 });
 
-export const {
-  openSidebar,
-  closeSidebar,
-  toggleSidebar,
-  openOverlaySidebar,
-  closeOverlaySidebar,
-  toggleOverlaySidebar,
-} = headerSlice.actions;
+export const { openOverlaySidebar, closeOverlaySidebar, toggleOverlaySidebar } =
+  headerSlice.actions;
 
 export const isOverlaySidebarStatus = (state: GlobalState) =>
   state.header.isOverlaySidebarOpen;

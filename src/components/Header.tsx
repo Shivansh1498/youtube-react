@@ -5,18 +5,14 @@ import {
   Button,
   IconButton,
   Toolbar,
-  useMediaQuery,
 } from "@mui/material";
 import { useTheme } from "@mui/system";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HamburgerLogo } from "../assets/svgs/HamburgerLogo";
 import { SearchLogo } from "../assets/svgs/SearchLogo";
 import { YoutubeLogo } from "../assets/svgs/YoutubeLogo";
-import {
-  openOverlaySidebar,
-  toggleSidebar,
-} from "../store/slices/header/headerSlice";
+import { openOverlaySidebar } from "../store/slices/header/headerSlice";
 import { searchVideosAsync } from "../store/slices/searchResult/searchResultSlice";
 import { toggleTheme } from "../store/slices/theme/themeSlice";
 import { useAppDispatch } from "../types/globalTypes";
@@ -30,8 +26,6 @@ const Header = () => {
   const [searchOptions, setSearchOptions] = useState<string[]>([]);
   const [isOptionbarOpen, setisOptionbarOpen] = useState<boolean>(false);
   const theme = useTheme();
-  const location = useLocation();
-  const equalOrAboveTabletWidth = useMediaQuery("(min-width:768px)");
 
   let currentTheme = localStorage.getItem("theme") === "dark";
 
@@ -50,11 +44,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const isSidebarOpen = () => {
-    if (location.pathname === "/" && equalOrAboveTabletWidth) {
-      dispatch(toggleSidebar());
-    } else {
-      dispatch(openOverlaySidebar());
-    }
+    dispatch(openOverlaySidebar());
   };
 
   function handleSearch(e: FormEvent<HTMLFormElement>): void {

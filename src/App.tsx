@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Header from "./components/Header";
-import SidebarHomePage from "./components/Sidebars/SidebarHomePage";
 import { getDesignTokens } from "./themes/globalThemePalette";
 import { IRootState } from "./store/store";
 import { createTheme } from "@mui/material/styles";
@@ -43,9 +42,7 @@ const App = () => {
         <main className="main-container">
           <Suspense fallback={<YoutubePageLoading />}>
             <Routes>
-              <Route path="/" element={<SidebarHomePage />}>
-                <Route index element={<Home />} />
-              </Route>
+              <Route index element={<Home />} />
               <Route path="/watch" element={<VideoDetail />} />
               <Route path="/results" element={<SearchPage />} />
               <Route path="*" element={<ErrorPage />} />

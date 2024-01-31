@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Card,
   CardContent,
@@ -11,8 +10,8 @@ import {
 import { useTheme } from "@mui/system";
 import { Link } from "react-router-dom";
 import { VerifiedIcon } from "../assets/svgs/VerifiedIcon";
-import { timeSincePublished } from "../utils/helperFunctions";
 import { SearchPageVideoCardProps } from "../types/propTypes";
+import { timeSincePublished } from "../utils/helperFunctions";
 
 const SearchPageVideoCard = ({
   thumbnail,

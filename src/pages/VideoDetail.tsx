@@ -18,7 +18,6 @@ import {
   currentVideoChannelSubscriberCount,
   currentVideoDetailAsync,
 } from "../store/slices/currentVideo/currentVideoSlice";
-import { closeSidebar } from "../store/slices/header/headerSlice";
 import {
   GlobalState,
   useAppDispatch,
@@ -48,7 +47,6 @@ const VideoDetail = () => {
   const videoId = queryParams.get("v");
 
   useEffect(() => {
-    dispatch(closeSidebar());
     if (typeof videoId === "string") {
       dispatch(currentVideoDetailAsync(videoId));
       dispatch(fetchCommentsAsync(videoId));
