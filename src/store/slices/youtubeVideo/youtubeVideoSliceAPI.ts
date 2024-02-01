@@ -1,14 +1,37 @@
+import { Video } from "../../../types/youtubeVideosTypes";
 import youtubeAxios from "../../../utils/youtubeAxios";
 
-export const mostPopularVideos = async () => {
+type TParams = {
+  part: string;
+  chart: string;
+  regionCode: string;
+  maxResults: number;
+  videoCategoryId?: string;
+  key: string;
+};
+
+export const mostPopularVideos = async (
+  videoCategoryId: string = ""
+): Promise<Video[] | Error> => {
   try {
-    const { data } = await youtubeAxios.get(
-      `/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&maxResults=10&key=${
-        import.meta.env.VITE_YOUTUBE_API_KEY
-      }`
-    );
+    const params: TParams = {
+      part: "snippet,contentDetails,statistics",
+      chart: "mostPopular",
+      regionCode: "IN",
+      maxResults: 20,
+      key: import.meta.env.VITE_YOUTUBE_API_KEY,
+    };
+
+    if (videoCategoryId) {
+      params.videoCategoryId = videoCategoryId;
+    }
+
+    const { data } = await youtubeAxios.get("/videos", {
+      params: params,
+    });
+
     return data.items;
   } catch (error) {
-    console.log(error);
+    return new Error(`Error fetching youtube videos: ${error}`);
   }
 };

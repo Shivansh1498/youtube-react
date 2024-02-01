@@ -5,6 +5,7 @@ import { CurrentVideo } from "./currentVideo/currentVideoTypes";
 import { SearchResults } from "./searchResultsType";
 import { Header, Theme } from "./themeAndHeaderTypes";
 import { YoutubeVideos } from "./youtubeVideosTypes";
+import { VideoCategoryChip } from "./videoCategoryChipTypes";
 
 export type GlobalState = {
   theme: Theme;
@@ -13,6 +14,7 @@ export type GlobalState = {
   currentVideo: CurrentVideo;
   searchResults: SearchResults;
   commentSection: CommentSection;
+  videoCategory: VideoCategoryChip;
 };
 
 export const useAppDispatch: () => AppDispatch = useDispatch;

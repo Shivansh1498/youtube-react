@@ -5,6 +5,7 @@ import headerSlice from "./slices/header/headerSlice";
 import themeSlice from "./slices/theme/themeSlice";
 import youtubeVideoSlice from "./slices/youtubeVideo/youtubeVideoSlice";
 import searchResultSlice from "./slices/searchResult/searchResultSlice";
+import videoCategorySlice from "./slices/videoCategory/videoCategorySlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     currentVideo: currentVideoSlice,
     searchResults: searchResultSlice,
     commentSection: commentThreadSlice,
+    videoCategory: videoCategorySlice,
   },
 });
 

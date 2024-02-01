@@ -45,6 +45,17 @@
   }
 }
 
+// Home Page Styles
+.homepage-container {
+  .homepage-chip-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
 // Card Container
 
 .card-container {

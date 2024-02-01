@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { mostPopularVideos } from "./youtubeVideoSliceAPI";
+import { YoutubeVideos } from "../../../types/youtubeVideosTypes";
 
-const initialState = {
+const initialState: YoutubeVideos = {
   video: [],
   loading: false,
   error: null as unknown,
@@ -9,8 +10,12 @@ const initialState = {
 
 export const mostPopularVideosAsync = createAsyncThunk(
   "youtubeVideo/mostPopularVideos",
-  async () => {
-    return await mostPopularVideos();
+  async (videoCategoryId: string, { rejectWithValue }) => {
+    try {
+      return await mostPopularVideos(videoCategoryId);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
 
@@ -28,14 +33,21 @@ const youtubeVideoSlice = createSlice({
     builder
       .addCase(mostPopularVideosAsync.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(mostPopularVideosAsync.fulfilled, (state, action) => {
         state.loading = false;
-        state.video = action.payload;
+        if (Array.isArray(action.payload)) {
+          state.video = action.payload;
+          state.error = null;
+        } else {
+          state.video = [];
+          state.error = action.payload.message;
+        }
       })
       .addCase(mostPopularVideosAsync.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.error;
       });
   },
 });

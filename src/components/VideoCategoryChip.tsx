@@ -1,11 +1,28 @@
 import { Chip } from "@mui/material";
+import { useAppDispatch } from "../types/globalTypes";
+import { mostPopularVideosAsync } from "../store/slices/youtubeVideo/youtubeVideoSlice";
 
-const VideoCategoryChip = () => {
+const VideoCategoryChip = ({
+  category,
+  categoryId,
+}: {
+  category: string;
+  categoryId: string;
+}) => {
+  const dispatch = useAppDispatch();
+
   const handleClick = () => {
-    console.info("You clicked the Chip.");
+    dispatch(mostPopularVideosAsync(categoryId));
   };
 
-  return <Chip size="medium" label="Chip Filled" onClick={handleClick} />;
+  return (
+    <Chip
+      size="medium"
+      label={category}
+      onClick={handleClick}
+      sx={{ borderRadius: 2 }}
+    />
+  );
 };
 
 export default VideoCategoryChip;
