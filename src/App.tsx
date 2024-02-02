@@ -30,7 +30,7 @@ const App = () => {
 
   useEffect(() => {
     if (!youtubeVideosList.length) {
-      dispatch(mostPopularVideosAsync());
+      dispatch(mostPopularVideosAsync(""));
     }
   }, []);
 

@@ -42,7 +42,13 @@ const YoutubeVideoCard = ({
         className="card-container"
       >
         <span style={{ position: "relative" }}>
-          <CardMedia sx={{ height: "225px" }} image={imageUrl} title={""} />
+          <CardMedia
+            component="img"
+            sx={{ height: "225px" }}
+            image={imageUrl}
+            title={""}
+            loading="lazy"
+          />
           <span className="video-timespan-badge">{videoDuration}</span>
         </span>
         <CardContent>

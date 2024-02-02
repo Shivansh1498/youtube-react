@@ -1,6 +1,7 @@
 import { Chip } from "@mui/material";
-import { useAppDispatch } from "../types/globalTypes";
+import { useState } from "react";
 import { mostPopularVideosAsync } from "../store/slices/youtubeVideo/youtubeVideoSlice";
+import { useAppDispatch } from "../types/globalTypes";
 
 const VideoCategoryChip = ({
   category,
@@ -10,6 +11,7 @@ const VideoCategoryChip = ({
   categoryId: string;
 }) => {
   const dispatch = useAppDispatch();
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleClick = () => {
     dispatch(mostPopularVideosAsync(categoryId));
@@ -20,7 +22,17 @@ const VideoCategoryChip = ({
       size="medium"
       label={category}
       onClick={handleClick}
-      sx={{ borderRadius: 2 }}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      sx={{
+        borderRadius: 2,
+        color: isFocused ? "black" : "",
+        backgroundColor: isFocused ? "white" : "",
+        "&:hover": {
+          color: isFocused ? "black" : "",
+          backgroundColor: isFocused ? "white" : "",
+        },
+      }}
     />
   );
 };
