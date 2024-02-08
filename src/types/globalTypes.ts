@@ -6,6 +6,7 @@ import { SearchResults } from "./searchResultsType";
 import { Header, Theme } from "./themeAndHeaderTypes";
 import { YoutubeVideos } from "./youtubeVideosTypes";
 import { VideoCategoryChip } from "./videoCategoryChipTypes";
+import { ChannelPage } from "./channelPageTypes";
 
 export type GlobalState = {
   theme: Theme;
@@ -15,6 +16,7 @@ export type GlobalState = {
   searchResults: SearchResults;
   commentSection: CommentSection;
   videoCategory: VideoCategoryChip;
+  channelPage: ChannelPage;
 };
 
 export const useAppDispatch: () => AppDispatch = useDispatch;

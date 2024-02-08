@@ -5,6 +5,7 @@ export interface SearchPageVideoCardProps {
   channelTitle: string;
   uplodedHowLongAgo: string;
   videoId: string;
+  channelId: string;
 }
 
 export interface YoutubeVideoCardProps {

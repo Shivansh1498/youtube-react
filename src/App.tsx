@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "./types/globalTypes";
 // Importing Pages Using Lazy Loading
 const Home = lazy(() => import("./pages/Home"));
 const VideoDetail = lazy(() => import("./pages/VideoDetail"));
+const ChannelDetail = lazy(() => import("./pages/ChannelDetail"));
 const SearchPage = lazy(() => import("./pages/SearchPage"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 
@@ -44,6 +45,10 @@ const App = () => {
             <Routes>
               <Route index element={<Home />} />
               <Route path="/watch" element={<VideoDetail />} />
+              <Route
+                path="/channel/:channelDetailId"
+                element={<ChannelDetail />}
+              />
               <Route path="/results" element={<SearchPage />} />
               <Route path="*" element={<ErrorPage />} />
             </Routes>

@@ -20,10 +20,13 @@ const SearchPageVideoCard = ({
   channelTitle,
   uplodedHowLongAgo,
   videoId,
+  channelId,
 }: SearchPageVideoCardProps) => {
   const theme = useTheme();
   return (
-    <Link to={`/watch?v=${videoId}`}>
+    <Link
+      to={videoId === null ? `/channel/${channelId}` : `/watch?v=${videoId}`}
+    >
       <Card
         sx={{
           display: "flex",
@@ -38,16 +41,31 @@ const SearchPageVideoCard = ({
         elevation={0}
       >
         <Box className="search-page-video-card">
-          <CardMedia
-            component="img"
-            sx={{
-              objectFit: "cover",
-              width: { xs: 300, md: 350 },
-            }}
-            image={thumbnail}
-            alt="Live from space album cover"
-          />
-          {/* <span className="video-timespan-badge">10:40</span> */}
+          {channelId ? (
+            <Box sx={{ width: { xs: 300, md: 350 } }}>
+              <CardMedia
+                component="img"
+                sx={{
+                  objectFit: "cover",
+                  width: { xs: 150, md: 200 },
+                  borderRadius: "50%",
+                  marginInline: "auto",
+                }}
+                image={thumbnail}
+                alt="Live from space album cover"
+              />
+            </Box>
+          ) : (
+            <CardMedia
+              component="img"
+              sx={{
+                objectFit: "cover",
+                width: { xs: 300, md: 350 },
+              }}
+              image={thumbnail}
+              alt="Live from space album cover"
+            />
+          )}
         </Box>
         <Box>
           <CardContent

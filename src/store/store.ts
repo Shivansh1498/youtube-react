@@ -6,6 +6,7 @@ import themeSlice from "./slices/theme/themeSlice";
 import youtubeVideoSlice from "./slices/youtubeVideo/youtubeVideoSlice";
 import searchResultSlice from "./slices/searchResult/searchResultSlice";
 import videoCategorySlice from "./slices/videoCategory/videoCategorySlice";
+import ChannelPageSlice from "./slices/channelPage/channelPageSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     searchResults: searchResultSlice,
     commentSection: commentThreadSlice,
     videoCategory: videoCategorySlice,
+    channelInfo: ChannelPageSlice,
   },
 });
 

@@ -55,7 +55,8 @@ const SearchPage = () => {
           videoDetails.map((item) => (
             <SearchPageVideoCard
               key={item.etag}
-              videoId={item.id.videoId}
+              videoId={item.id.videoId ?? null}
+              channelId={item.id.channelId ?? null}
               title={item.snippet.title}
               description={item.snippet.description}
               thumbnail={item.snippet.thumbnails.high.url}

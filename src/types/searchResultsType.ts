@@ -28,6 +28,7 @@ export interface Item {
 export interface Id {
   kind: string;
   videoId: string;
+  channelId: string;
 }
 
 export interface Snippet {
