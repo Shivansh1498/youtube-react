@@ -3,7 +3,13 @@ import { ChannelPage } from "../../../types/channelPageTypes";
 import { fetchChannelPage } from "./channelPageAPI";
 
 const initialState: ChannelPage = {
-  channelHeader: null,
+  channelHeader: {
+    channelLogo: "",
+    channelTitle: "",
+    channelDescription: "",
+    channelTotalVideos: "",
+    channelTotalSubscribers: "",
+  },
   channelVideos: [],
   loading: false,
   error: null,

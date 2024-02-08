@@ -1,5 +1,5 @@
 export type ChannelPage = {
-  channelHeader: ChannelPageHeader | null;
+  channelHeader: ChannelPageHeader;
   channelVideos: ChannelPageVideos[];
   loading: boolean;
   error: unknown;

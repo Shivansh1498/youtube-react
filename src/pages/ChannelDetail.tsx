@@ -1,8 +1,8 @@
 import { Box, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../types/globalTypes";
 import { fetchChannelPageAsync } from "../store/slices/channelPage/channelPageSlice";
+import { useAppDispatch, useAppSelector } from "../types/globalTypes";
 import { formatYoutubeCount } from "../utils/helperFunctions";
 
 const ChannelDetail = () => {
@@ -15,7 +15,7 @@ const ChannelDetail = () => {
     channelDescription,
     channelTotalVideos,
     channelTotalSubscribers,
-  } = useAppSelector((state) => state.channelInfo.channelHeader)!;
+  } = useAppSelector((state) => state?.channelInfo?.channelHeader);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
