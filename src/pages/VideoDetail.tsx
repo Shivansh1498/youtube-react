@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
 import VideoComment from "../components/VideoComment";
-import WatchPageVideoCard from "../components/WatchPageVideoCard";
+import WatchPageVideoCard from "../components/VideoCards/WatchPageVideoCard";
 import {
   commentsInfoArray,
   fetchCommentsAsync,

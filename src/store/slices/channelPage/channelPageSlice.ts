@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ChannelPage } from "../../../types/channelPageTypes";
-import { fetchChannelPage } from "./channelPageAPI";
+import { fetchChannelPage, fetchChannelVideos } from "./channelPageAPI";
 
 const initialState: ChannelPage = {
   channelHeader: {
@@ -22,10 +22,30 @@ export const fetchChannelPageAsync = createAsyncThunk(
   }
 );
 
+export const fetchChannelVideosAsync = createAsyncThunk(
+  "channelPage/fetchChannelVideos",
+  async (channelId: string) => {
+    return await fetchChannelVideos(channelId);
+  }
+);
+
 const ChannelPageSlice = createSlice({
   name: "channelPage",
   initialState,
-  reducers: {},
+  reducers: {
+    clearYoutubeChannelState: (state) => {
+      state.channelHeader = {
+        channelLogo: "",
+        channelTitle: "",
+        channelDescription: "",
+        channelTotalVideos: "",
+        channelTotalSubscribers: "",
+      };
+      state.channelVideos = [];
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchChannelPageAsync.pending, (state) => {
@@ -48,10 +68,24 @@ const ChannelPageSlice = createSlice({
       .addCase(fetchChannelPageAsync.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(fetchChannelVideosAsync.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchChannelVideosAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        if (Array.isArray(action.payload)) {
+          state.channelVideos = action.payload;
+        }
+      })
+      .addCase(fetchChannelVideosAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
-export const {} = ChannelPageSlice.actions;
+export const { clearYoutubeChannelState } = ChannelPageSlice.actions;
 
 export default ChannelPageSlice.reducer;

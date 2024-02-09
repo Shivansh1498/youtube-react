@@ -1,9 +1,15 @@
 import { Box, Stack, Tab, Tabs, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchChannelPageAsync } from "../store/slices/channelPage/channelPageSlice";
+import {
+  clearYoutubeChannelState,
+  fetchChannelPageAsync,
+  fetchChannelVideosAsync,
+} from "../store/slices/channelPage/channelPageSlice";
 import { useAppDispatch, useAppSelector } from "../types/globalTypes";
 import { formatYoutubeCount } from "../utils/helperFunctions";
+import ChannelVideoCard from "../components/VideoCards/ChannelVideoCard";
+import { useTheme } from "@mui/system";
 
 const ChannelDetail = () => {
   const [value, setValue] = useState<number>(0);
@@ -16,15 +22,24 @@ const ChannelDetail = () => {
     channelTotalVideos,
     channelTotalSubscribers,
   } = useAppSelector((state) => state?.channelInfo?.channelHeader);
+  const channelVideos = useAppSelector(
+    (state) => state.channelInfo.channelVideos
+  );
+  const theme = useTheme();
 
-  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
   useEffect(() => {
     if (typeof channelDetailId === "string") {
       dispatch(fetchChannelPageAsync(channelDetailId));
+      dispatch(fetchChannelVideosAsync(channelDetailId));
     }
+
+    return () => {
+      dispatch(clearYoutubeChannelState());
+    };
   }, []);
 
   return (
@@ -42,14 +57,14 @@ const ChannelDetail = () => {
           />
         </section>
         <Stack spacing={2} className="channel-info">
-          <Typography variant="h4" component={"h4"}>
+          <Typography variant="h4" component={"h4"} fontWeight={600}>
             {channelTitle}
           </Typography>
-          <Typography variant="body1" component={"p"}>
+          <Typography variant="body1" component={"p"} color="text.secondary">
             {formatYoutubeCount(+channelTotalSubscribers)} subscribers ‧{" "}
             {formatYoutubeCount(+channelTotalVideos)} videos
           </Typography>
-          <Typography variant="body1" component={"p"}>
+          <Typography variant="body1" component={"p"} color="text.secondary">
             {channelDescription}
           </Typography>
         </Stack>
@@ -61,14 +76,31 @@ const ChannelDetail = () => {
           aria-label="youtube channel tabs"
           sx={{
             "& .MuiTabs-flexContainer": {
-              borderBottom: "1px solid #80808099", // Change this to the desired color
+              backgroundColor: theme.palette.youtubeTabs.background,
             },
           }}
         >
           <Tab label="Videos" />
         </Tabs>
-        <Typography sx={{ p: 2 }} hidden={value !== 0}>
-          Tab 1 Content
+        <Typography component={"section"} sx={{ p: 2 }} hidden={value !== 0}>
+          <Stack
+            direction={"row"}
+            spacing={3}
+            useFlexGap
+            flexWrap={"wrap"}
+            mt={1}
+          >
+            {channelVideos.map((video) => (
+              <ChannelVideoCard
+                key={video.videoId}
+                videoId={video.videoId}
+                videoThubnail={video.videoThubnail}
+                videoTitle={video.videoTitle}
+                videoViews={video.videoViews}
+                videoPostedDate={video.videoPostedDate}
+              />
+            ))}
+          </Stack>
         </Typography>
       </Box>
     </Box>

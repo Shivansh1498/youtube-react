@@ -5,13 +5,13 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/system";
 import { Link } from "react-router-dom";
-import { VerifiedIcon } from "../assets/svgs/VerifiedIcon";
+import { VerifiedIcon } from "../../assets/svgs/VerifiedIcon";
 import {
   convertDurationToTime,
   formatYoutubeCount,
   timeSincePublished,
-} from "../utils/helperFunctions";
-import { YoutubeVideoCardProps } from "../types/propTypes";
+} from "../../utils/helperFunctions";
+import { YoutubeVideoCardProps } from "../../types/propTypes";
 
 const YoutubeVideoCard = ({
   imageUrl,

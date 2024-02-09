@@ -2,7 +2,7 @@ import { Box, Stack } from "@mui/material";
 import { useEffect } from "react";
 import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
 import VideoCategoryChip from "../components/VideoCategoryChip";
-import YoutubeVideoCard from "../components/YoutubeVideoCard";
+import YoutubeVideoCard from "../components/VideoCards/YoutubeVideoCard";
 import { fetchVideoCategoriesAsync } from "../store/slices/videoCategory/videoCategorySlice";
 import { useAppDispatch, useAppSelector } from "../types/globalTypes";
 import { CategoriesChip } from "../types/videoCategoryChipTypes";

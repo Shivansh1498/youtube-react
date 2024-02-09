@@ -117,6 +117,32 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
   }
+
+  .channel-video-card {
+    max-width: 260px;
+    cursor: pointer;
+
+    .MuiCardContent-root {
+      padding-inline: 0px;
+    }
+
+    .channelPageVideoTitle {
+      @include truncateText(2);
+    }
+    .watchpage-verified-icon {
+      height: 15px;
+      display: inline-block;
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  .MuiTabs-root {
+    position: sticky;
+    top: 64px;
+    z-index: 1;
+    border-bottom: 1px solid #80808099;
+  }
 }
 
 // Scrollbar Styles

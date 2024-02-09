@@ -3,23 +3,23 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { YoutubeVideoCardProps } from "../types/propTypes";
-import { VerifiedIcon } from "../assets/svgs/VerifiedIcon";
+import { YoutubeVideoCardProps } from "../../types/propTypes";
+import { VerifiedIcon } from "../../assets/svgs/VerifiedIcon";
 import { useTheme } from "@mui/system";
 import { Link, useLocation } from "react-router-dom";
 import {
   convertDurationToTime,
   formatYoutubeCount,
   timeSincePublished,
-} from "../utils/helperFunctions";
+} from "../../utils/helperFunctions";
 import { useEffect } from "react";
-import { useAppDispatch } from "../types/globalTypes";
+import { useAppDispatch } from "../../types/globalTypes";
 import {
   clearChannelInfo,
   clearcurrentVideoDetail,
   currentVideoDetailAsync,
-} from "../store/slices/currentVideo/currentVideoSlice";
-import { fetchCommentsAsync } from "../store/slices/commentThread/commentThreadSlice";
+} from "../../store/slices/currentVideo/currentVideoSlice";
+import { fetchCommentsAsync } from "../../store/slices/commentThread/commentThreadSlice";
 
 const WatchPageVideoCard = ({
   imageUrl,

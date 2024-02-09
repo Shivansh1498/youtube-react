@@ -15,6 +15,9 @@ export const getDesignTokens = (mode: PaletteMode) => ({
             inputBackground: "#fff",
             inputColor: "#111111",
           },
+          youtubeTabs: {
+            background: "white",
+          },
         }
       : {
           icon: {
@@ -26,6 +29,9 @@ export const getDesignTokens = (mode: PaletteMode) => ({
             background: "#121212",
             inputBackground: "#121212",
             inputColor: "#ffffffe0",
+          },
+          youtubeTabs: {
+            background: "#121212",
           },
         }),
   },

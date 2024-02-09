@@ -2,7 +2,7 @@ import { Box, Stack } from "@mui/material";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import SearchPageVideoCard from "../components/SearchPageVideoCard";
+import SearchPageVideoCard from "../components/VideoCards/SearchPageVideoCard";
 import SearchShimmerUI from "../components/ShimmerUI/SearchShimmerUI";
 import SidebarOverlay from "../components/Sidebars/SidebarOverlay";
 import {
